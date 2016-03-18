@@ -11,7 +11,7 @@
         <file>logs/antlr-scim-filter.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- Rollover daily -->
-            <fileNamePattern>toshiba-test-suite-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>antlr-scim-filter-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 50MB -->
                 <maxFileSize>50MB</maxFileSize>
