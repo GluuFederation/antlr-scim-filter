@@ -5,17 +5,12 @@
  */
 package org.gluu.antlr.scimFilter;
 
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.gluu.antlr.scimFilter.exception.ScimFilterErrorHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
-
-import static org.junit.Assert.assertNull;
 
 /**
  * @author Val Pecaoco
@@ -66,27 +61,8 @@ public class FilterTest {
     @Test
     public void testFilter() throws Exception {
 
-        // Get lexer
-        ANTLRInputStream input = new ANTLRInputStream(this.testFilter);
-        ScimFilterLexer lexer = new ScimFilterLexer(input);
-
-        // Get list of matched tokens
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-        // Pass tokens to the parser
-        ScimFilterParser parser = new ScimFilterParser(tokens);
-        parser.setBuildParseTree(true);
-        parser.setTrimParseTree(true);
-        parser.setProfile(true);
-        parser.removeErrorListeners();
-        parser.setErrorHandler(new ScimFilterErrorHandler());
-
+        MainFilterParser mainFilterParser = new MainFilterParser();
+        mainFilterParser.parse(this.testFilter);
         assert(this.isValid);
-
-        ParserRuleContext ruleContext = parser.scimFilter();
-        assertNull(ruleContext.exception);
-
-        // Walk tree
-        ParseTreeWalker.DEFAULT.walk(new MainFilterListener(), ruleContext);
     }
 }
