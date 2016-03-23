@@ -17,14 +17,14 @@ scimFilter
  ;
 
 expression
- : ATTRNAME comparator criteria      # ATTR_COMP_CRITERIA
- | ATTRNAME comparator expression    # ATTR_COMP_EXPR
- | ATTRNAME PR                       # ATTR_PR
+ : LPAREN expression RPAREN          # LPAREN_EXPR_RPAREN
  | NOT expression                    # NOT_EXPR
  | expression AND expression         # EXPR_AND_EXPR
  | expression OR expression          # EXPR_OR_EXPR
  | expression comparator expression  # EXPR_COMP_EXPR
- | LPAREN expression RPAREN          # LPAREN_EXPR_RPAREN
+ | ATTRNAME comparator criteria      # ATTR_COMP_CRITERIA
+ | ATTRNAME comparator expression    # ATTR_COMP_EXPR
+ | ATTRNAME PR                       # ATTR_PR
  ;
 
 criteria : DELIMETER (.)+? DELIMETER;

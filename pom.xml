@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<antlrv4.version>4.5.2-1</antlrv4.version>
+		<antlr4.visitor>true</antlr4.visitor>
 	</properties>
 
 	<dependencies>

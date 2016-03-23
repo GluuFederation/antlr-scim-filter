@@ -8,15 +8,43 @@ package org.gluu.antlr.scimFilter;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.gluu.antlr.scimFilter.exception.ScimFilterErrorHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Val Pecaoco
  */
 public class MainFilterParser {
 
-    public void parse(String filter) throws Exception {
+    Logger logger = LoggerFactory.getLogger(MainFilterParser.class);
+
+    public String visitTree(String filter) throws Exception {
+
+        ParseTree parseTree = getParser(filter).scimFilter();
+
+        // Visit tree
+        MainFilterVisitor mainFilterVisitor = new MainFilterVisitor();
+        String result = mainFilterVisitor.visit(parseTree);
+
+        return result;
+    }
+
+    public void walkTree(String filter) throws Exception {
+
+        ParserRuleContext ruleContext = getParser(filter).scimFilter();
+
+        if (ruleContext.exception != null) {
+            throw ruleContext.exception;
+        }
+
+        // Walk tree
+        ParseTreeWalker.DEFAULT.walk(new MainFilterListener(), ruleContext);
+    }
+
+    private ScimFilterParser getParser(String filter) throws Exception {
 
         // Get lexer
         ANTLRInputStream input = new ANTLRInputStream(filter);
@@ -33,13 +61,6 @@ public class MainFilterParser {
         parser.removeErrorListeners();
         parser.setErrorHandler(new ScimFilterErrorHandler());
 
-        ParserRuleContext ruleContext = parser.scimFilter();
-
-        if (ruleContext.exception != null) {
-            throw ruleContext.exception;
-        }
-
-        // Walk tree
-        ParseTreeWalker.DEFAULT.walk(new MainFilterListener(), ruleContext);
+        return parser;
     }
 }
