@@ -150,6 +150,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
         result.append(visit(ctx.comparator()));
         result.append(" (");
         result.append(visit(ctx.expression(1)));
+        result.append("))");
 
         return result.toString();
     }
