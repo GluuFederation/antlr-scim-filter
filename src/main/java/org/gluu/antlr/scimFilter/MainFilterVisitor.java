@@ -127,7 +127,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
         result.append(visit(ctx.expression(1)));
         result.append("))");
 
-        return "";
+        return result.toString();
     }
 
     /**

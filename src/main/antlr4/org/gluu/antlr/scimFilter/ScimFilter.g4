@@ -43,7 +43,7 @@ PR : 'pr';
 LPAREN : '(';
 RPAREN : ')';
 
-ATTRNAME  : ('-' | '_' | 'A'..'Z' | 'a'..'z' | '0'..'9' | '.')+;
+ATTRNAME : ('-' | '_' | 'A'..'Z' | 'a'..'z' | '0'..'9' | '.')+;
 
 DELIMETER : '"';
 
