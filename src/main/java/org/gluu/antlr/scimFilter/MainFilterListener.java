@@ -51,10 +51,10 @@ public class MainFilterListener extends ScimFilterBaseListener {
      * @param ctx
      */
     @Override
-    public void enterATTR_COMP_CRITERIA(ScimFilterParser.ATTR_COMP_CRITERIAContext ctx) {
-        super.enterATTR_COMP_CRITERIA(ctx);
+    public void enterATTR_OPER_CRITERIA(ScimFilterParser.ATTR_OPER_CRITERIAContext ctx) {
+        super.enterATTR_OPER_CRITERIA(ctx);
         logger.info("ATTRNAME = " + ctx.ATTRNAME().getText());
-        logger.info("comparator = " + ctx.comparator().getText());
+        logger.info("operator = " + ctx.operator().getText());
         logger.info("criteria = " + ctx.criteria().getText());
     }
 
@@ -66,10 +66,10 @@ public class MainFilterListener extends ScimFilterBaseListener {
      * @param ctx
      */
     @Override
-    public void enterATTR_COMP_EXPR(ScimFilterParser.ATTR_COMP_EXPRContext ctx) {
-        super.enterATTR_COMP_EXPR(ctx);
+    public void enterATTR_OPER_EXPR(ScimFilterParser.ATTR_OPER_EXPRContext ctx) {
+        super.enterATTR_OPER_EXPR(ctx);
         logger.info("ATTRNAME = " + ctx.ATTRNAME().getText());
-        logger.info("comparator = " + ctx.comparator().getText());
+        logger.info("operator = " + ctx.operator().getText());
         logger.info("expression = " + ctx.expression().getText());
     }
 

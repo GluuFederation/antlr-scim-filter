@@ -17,20 +17,25 @@ scimFilter
  ;
 
 expression
- : LPAREN expression RPAREN          # LPAREN_EXPR_RPAREN
- | NOT expression                    # NOT_EXPR
- | expression AND expression         # EXPR_AND_EXPR
- | expression OR expression          # EXPR_OR_EXPR
- | expression comparator expression  # EXPR_COMP_EXPR
- | ATTRNAME comparator criteria      # ATTR_COMP_CRITERIA
- | ATTRNAME comparator expression    # ATTR_COMP_EXPR
- | ATTRNAME PR                       # ATTR_PR
+ : LPAREN expression RPAREN        # LPAREN_EXPR_RPAREN
+ | NOT expression                  # NOT_EXPR
+ | expression AND expression       # EXPR_AND_EXPR
+ | expression OR expression        # EXPR_OR_EXPR
+ | expression operator expression  # EXPR_OPER_EXPR
+ | ATTRNAME operator criteria      # ATTR_OPER_CRITERIA
+ | ATTRNAME operator expression    # ATTR_OPER_EXPR
+ | ATTRNAME PR                     # ATTR_PR
  ;
 
-criteria : DELIMETER (.)+? DELIMETER;
+criteria : STRING;
 
-comparator
- : 'eq' | 'ne' | 'co' | 'sq' | 'ew' | 'gt' | 'lt' | 'ge' | 'le'
+STRING : '"' (ESC | ~[\\])+? '"';
+fragment ESC : '\\' (["\\/bfnrt] | UNICODE);
+fragment UNICODE : 'u' HEX HEX HEX HEX;
+fragment HEX : [0-9a-fA-F];
+
+operator
+ : 'eq' | 'ne' | 'co' | 'sw' | 'ew' | 'gt' | 'lt' | 'ge' | 'le'
  ;
 
 NOT : 'not';
@@ -44,7 +49,5 @@ LPAREN : '(';
 RPAREN : ')';
 
 ATTRNAME : ('-' | '_' | 'A'..'Z' | 'a'..'z' | '0'..'9' | '.')+;
-
-DELIMETER : '"';
 
 WS : ('\t' | ' ' | '\r' | '\n'| '\u000C')+ -> skip;

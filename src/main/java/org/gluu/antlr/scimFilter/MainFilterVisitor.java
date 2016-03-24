@@ -5,6 +5,7 @@
  */
 package org.gluu.antlr.scimFilter;
 
+import org.gluu.antlr.scimFilter.enums.ScimOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,20 +140,11 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      * @param ctx
      */
     @Override
-    public String visitEXPR_COMP_EXPR(ScimFilterParser.EXPR_COMP_EXPRContext ctx) {
+    public String visitEXPR_OPER_EXPR(ScimFilterParser.EXPR_OPER_EXPRContext ctx) {
 
-        // logger.info(">>>>> IN visitEXPR_COMP_EXPR...");
+        // logger.info(">>>>> IN visitEXPR_OPER_EXPR...");
 
-        StringBuilder result = new StringBuilder("");
-        result.append("(");
-        result.append(visit(ctx.expression(0)));
-        result.append(" ");
-        result.append(visit(ctx.comparator()));
-        result.append(" ");
-        result.append(visit(ctx.expression(1)));
-        result.append(")");
-
-        return result.toString();
+        return ScimOperator.transform(visit(ctx.operator()), visit(ctx.expression(0)), visit(ctx.expression(1)));
     }
 
     /**
@@ -164,18 +156,11 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      * @param ctx
      */
     @Override
-    public String visitATTR_COMP_CRITERIA(ScimFilterParser.ATTR_COMP_CRITERIAContext ctx) {
+    public String visitATTR_OPER_CRITERIA(ScimFilterParser.ATTR_OPER_CRITERIAContext ctx) {
 
-        // logger.info(">>>>> IN visitATTR_COMP_CRITERIA...");
+        // logger.info(">>>>> IN visitATTR_OPER_CRITERIA...");
 
-        StringBuilder result = new StringBuilder("");
-        result.append(ctx.ATTRNAME().getText());
-        result.append(" ");
-        result.append(visit(ctx.comparator()));
-        result.append(" ");
-        result.append(visit(ctx.criteria()));
-
-        return result.toString();
+        return ScimOperator.transform(visit(ctx.operator()), ctx.ATTRNAME().getText(), visit(ctx.criteria()));
     }
 
     /**
@@ -187,18 +172,11 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      * @param ctx
      */
     @Override
-    public String visitATTR_COMP_EXPR(ScimFilterParser.ATTR_COMP_EXPRContext ctx) {
+    public String visitATTR_OPER_EXPR(ScimFilterParser.ATTR_OPER_EXPRContext ctx) {
 
-        // logger.info(">>>>> IN visitATTR_COMP_EXPR...");
+        // logger.info(">>>>> IN visitATTR_OPER_EXPR...");
 
-        StringBuilder result = new StringBuilder("");
-        result.append(ctx.ATTRNAME().getText());
-        result.append(" ");
-        result.append(visit(ctx.comparator()));
-        result.append(" ");
-        result.append(visit(ctx.expression()));
-
-        return result.toString();
+        return ScimOperator.transform(visit(ctx.operator()), ctx.ATTRNAME().getText(), visit(ctx.expression()));
     }
 
     /**
@@ -230,7 +208,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      * @param ctx
      */
     @Override
-    public String visitComparator(ScimFilterParser.ComparatorContext ctx) {
+    public String visitOperator(ScimFilterParser.OperatorContext ctx) {
         // logger.info(">>>>> IN visitComparator...");
         return ctx.getText();
     }
@@ -246,6 +224,6 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitCriteria(ScimFilterParser.CriteriaContext ctx) {
         // logger.info(">>>>> IN visitCriteria...");
-        return ctx.getText();
+        return ctx.getText().replaceAll("^\"|\"$", "");
     }
 }
