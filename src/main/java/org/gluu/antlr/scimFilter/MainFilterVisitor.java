@@ -28,7 +28,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitScimFilter(ScimFilterParser.ScimFilterContext ctx) {
 
-        // logger.info(">>>>> In visitScimFilter...");
+        logger.info(">>>>> IN visitScimFilter...");
 
         StringBuilder result = new StringBuilder("");
         result.append("(");
@@ -51,7 +51,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitLPAREN_EXPR_RPAREN(ScimFilterParser.LPAREN_EXPR_RPARENContext ctx) {
 
-        // logger.info(">>>>> In visitLPAREN_EXPR_RPAREN...");
+        // logger.info(">>>>> IN visitLPAREN_EXPR_RPAREN...");
 
         StringBuilder result = new StringBuilder("");
         result.append(ctx.LPAREN().getText());
@@ -72,12 +72,12 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitNOT_EXPR(ScimFilterParser.NOT_EXPRContext ctx) {
 
-        // logger.info(">>>>> In visitNOT_EXPR...");
+        // logger.info(">>>>> IN visitNOT_EXPR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("(!(");
+        result.append("!(");
         result.append(visit(ctx.expression()));
-        result.append("))");
+        result.append(")");
 
         return result.toString();
     }
@@ -93,15 +93,15 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitEXPR_AND_EXPR(ScimFilterParser.EXPR_AND_EXPRContext ctx) {
 
-        // logger.info(">>>>> In visitEXPR_AND_EXPR...");
+        // logger.info(">>>>> IN visitEXPR_AND_EXPR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("((");
+        result.append("&(");
         result.append(visit(ctx.expression(0)));
         result.append(")");
         result.append("(");
         result.append(visit(ctx.expression(1)));
-        result.append("))");
+        result.append(")");
 
         return result.toString();
     }
@@ -117,15 +117,15 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitEXPR_OR_EXPR(ScimFilterParser.EXPR_OR_EXPRContext ctx) {
 
-        // logger.info(">>>>> In visitEXPR_OR_EXPR...");
+        // logger.info(">>>>> IN visitEXPR_OR_EXPR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("(|(");
+        result.append("|(");
         result.append(visit(ctx.expression(0)));
         result.append(")");
         result.append("(");
         result.append(visit(ctx.expression(1)));
-        result.append("))");
+        result.append(")");
 
         return result.toString();
     }
@@ -141,16 +141,16 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitEXPR_COMP_EXPR(ScimFilterParser.EXPR_COMP_EXPRContext ctx) {
 
-        // logger.info(">>>>> In visitEXPR_COMP_EXPR...");
+        // logger.info(">>>>> IN visitEXPR_COMP_EXPR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("((");
+        result.append("(");
         result.append(visit(ctx.expression(0)));
-        result.append(") ");
+        result.append(" ");
         result.append(visit(ctx.comparator()));
-        result.append(" (");
+        result.append(" ");
         result.append(visit(ctx.expression(1)));
-        result.append("))");
+        result.append(")");
 
         return result.toString();
     }
@@ -166,16 +166,14 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitATTR_COMP_CRITERIA(ScimFilterParser.ATTR_COMP_CRITERIAContext ctx) {
 
-        // logger.info(">>>>> In visitATTR_COMP_CRITERIA...");
+        // logger.info(">>>>> IN visitATTR_COMP_CRITERIA...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("(");
         result.append(ctx.ATTRNAME().getText());
         result.append(" ");
         result.append(visit(ctx.comparator()));
         result.append(" ");
         result.append(visit(ctx.criteria()));
-        result.append(")");
 
         return result.toString();
     }
@@ -191,16 +189,14 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitATTR_COMP_EXPR(ScimFilterParser.ATTR_COMP_EXPRContext ctx) {
 
-        // logger.info(">>>>> In visitATTR_COMP_EXPR...");
+        // logger.info(">>>>> IN visitATTR_COMP_EXPR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("(");
         result.append(ctx.ATTRNAME().getText());
         result.append(" ");
         result.append(visit(ctx.comparator()));
         result.append(" ");
         result.append(visit(ctx.expression()));
-        result.append(")");
 
         return result.toString();
     }
@@ -216,12 +212,11 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
     @Override
     public String visitATTR_PR(ScimFilterParser.ATTR_PRContext ctx) {
 
-        // logger.info(">>>>> In visitATTR_PR...");
+        // logger.info(">>>>> IN visitATTR_PR...");
 
         StringBuilder result = new StringBuilder("");
-        result.append("(");
         result.append(ctx.ATTRNAME().getText());
-        result.append("=*)");
+        result.append("=*");
 
         return result.toString();
     }
@@ -236,7 +231,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      */
     @Override
     public String visitComparator(ScimFilterParser.ComparatorContext ctx) {
-        // logger.info(">>>>> In visitComparator...");
+        // logger.info(">>>>> IN visitComparator...");
         return ctx.getText();
     }
 
@@ -250,7 +245,7 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      */
     @Override
     public String visitCriteria(ScimFilterParser.CriteriaContext ctx) {
-        // logger.info(">>>>> In visitCriteria...");
+        // logger.info(">>>>> IN visitCriteria...");
         return ctx.getText();
     }
 }

@@ -27,19 +27,20 @@ public class FilterTest {
 
         return Arrays.asList(new Object[][] {
             // Valid
-            // { true, "userType eq \"emp\"loy\"ee\"" },
+            { true, "userType eq \"emp\"loy\"ee\"" },
             // { true, "userType eq \"employee\"" },
             { true, "userType1234 ne \"Employee\" and email.type eq \"work\"" },
-            // { true, "(userType1234 ne \"Employee\") or (email.type eq \"work\")" },
+            { true, "userType1234 ne \"Employee\" or email.type eq \"work\"" },
+            { true, "(userType1234 ne \"Employee\") or (email.type eq \"work\")" },
             { true, "userType pr" },
-            // { true, "userType pr and not (userType eq \"employee\")" },
+            { true, "userType pr and not (userType eq \"employee\")" },
             // { true, "not userType eq \"employee\"" },
             // { true, "not (userType eq \"employee\")" },
             // { true, "userType eq \"employee\" and (email.type eq \"Work\" or email-type eq \"personal\")" },
             // { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and user_Type eq \"employee\")" },
-            { true, "userType eq \"employee\" and userType pr" }
+            { true, "userType eq \"employee\" and userType pr" },
             // { true, "userType pr and userType eq \"employee\"" },
-            // { true, "(userType pr) and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
+            { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
             // { true, "userType pr and (type eq \"work\" or type eq \"personal\") and userType eq \"employee\"" },
             // Invalid
             /*
@@ -68,11 +69,14 @@ public class FilterTest {
         // Walk tree
         // mainFilterParser.walkTree(this.testFilter);
 
+        logger.info("----------");
+
         // Visit tree
         String result = mainFilterParser.visitTree(this.testFilter);
 
         logger.info("##### test filter = " + this.testFilter);
         logger.info(">>>>> parsed result = " + result);
+        logger.info("----------");
 
         assert(this.isValid);
     }
