@@ -27,23 +27,24 @@ public class FilterTest {
 
         return Arrays.asList(new Object[][] {
             // Valid
-            { true, "userType eq \"employee\"" },
-            { true, "userType ne \"ñÑ~!@#$%^&:*'/<,.`>()-=_+\"" },
+            { true, "userType eq \"emplo\"yee\"" },
+            { true, "userType ne \"ñÑ~!@\"#$%^\\&:*'\"\"/<,.`>()-=_+\"" },
             { true, "lastModified gt \"2011-05-13T04:42:34Z\"" },
             // { true, "userType eq \"employee\"" },
-            //   { true, "userType1234 ne \"Employee\" and email.type eq \"work\"" },
-            //   { true, "userType1234 ne \"Employee\" or email.type eq \"work\"" },
+            // { true, "userType1234 ne \"Employee\" and email.type eq \"work\"" },
+            // { true, "userType1234 ne \"Employee\" or email.type eq \"work\"" },
             { true, "userType1234 ne \"Employee\" or email.type eq \"work\"" },
-            //   { true, "userType pr" },
-            { true, "userType pr and not (userType eq \"employee\")" },
-            // { true, "not userType eq \"employee\"" },
+            // { true, "userType pr" },
+            //   { true, "userType pr and not (userType eq \"employee\")" },
+            { true, "not userType eq \"employee\"" },
             // { true, "not (userType eq \"employee\")" },
             // { true, "userType eq \"employee\" and (email.type eq \"Work\" or email-type eq \"personal\")" },
             // { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and user_Type eq \"employee\")" },
-            //   { true, "userType eq \"employee\" and userType pr" },
+            // { true, "userType eq \"employee\" and userType pr" },
             // { true, "userType pr and userType eq \"employee\"" },
-            { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
-            { true, "userType pr and (type eq \"work\" or type eq \"personal\") and (userType eq \"employee\")" }
+            // { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
+            { true, "userType pr and (type eq \"work\" or type eq \"personal\") and (userType eq \"employee\")" },
+            { true, "userType pr and type eq \"work\" or type eq \"personal\" and userType eq \"employee\"" }
             // { true, "userType pr and (type eq \"work\" or type eq \"personal\") and userType eq \"employee\"" }
             // Invalid
             /*
