@@ -53,7 +53,7 @@ public class FilterTest {
             { true, "pr userType pr" },
             { true, "not userType" },
             { true, "not userType not" }
-            /*/
+            */
         });
     }
 
@@ -69,9 +69,6 @@ public class FilterTest {
     public void testFilter() throws Exception {
 
         MainFilterParser mainFilterParser = new MainFilterParser();
-
-        // Walk tree
-        // mainFilterParser.walkTree(this.testFilter);
 
         logger.info("----------");
 

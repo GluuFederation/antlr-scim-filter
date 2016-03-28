@@ -32,18 +32,6 @@ public class MainFilterParser {
         return result;
     }
 
-    public void walkTree(String filter) throws Exception {
-
-        ParserRuleContext ruleContext = getParser(filter).scimFilter();
-
-        if (ruleContext.exception != null) {
-            throw ruleContext.exception;
-        }
-
-        // Walk tree
-        ParseTreeWalker.DEFAULT.walk(new MainFilterListener(), ruleContext);
-    }
-
     private ScimFilterParser getParser(String filter) throws Exception {
 
         // Get lexer
