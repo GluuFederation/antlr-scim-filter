@@ -17,14 +17,14 @@ scimFilter
  ;
 
 expression
- : NOT expression                  # NOT_EXPR
- | expression AND expression       # EXPR_AND_EXPR
- | expression OR expression        # EXPR_OR_EXPR
- | expression operator expression  # EXPR_OPER_EXPR
- | ATTRNAME PR                     # ATTR_PR
- | LPAREN expression RPAREN        # LPAREN_EXPR_RPAREN
- | ATTRNAME operator expression    # ATTR_OPER_EXPR
- | ATTRNAME operator criteria      # ATTR_OPER_CRITERIA
+ : NOT WS+? expression                       # NOT_EXPR
+ | expression WS+? AND WS+? expression       # EXPR_AND_EXPR
+ | expression WS+? OR WS+ expression         # EXPR_OR_EXPR
+ | expression WS+? operator WS+? expression  # EXPR_OPER_EXPR
+ | ATTRNAME WS+? PR                          # ATTR_PR
+ | ATTRNAME WS+? operator WS+? expression    # ATTR_OPER_EXPR
+ | ATTRNAME WS+? operator WS+? criteria      # ATTR_OPER_CRITERIA
+ | LPAREN WS*? expression WS*? RPAREN        # LPAREN_EXPR_RPAREN
  ;
 
 criteria : '"' .+? '"';
@@ -32,8 +32,6 @@ criteria : '"' .+? '"';
 operator
  : 'eq' | 'ne' | 'co' | 'sw' | 'ew' | 'gt' | 'lt' | 'ge' | 'le'
  ;
-
-DELIMETER : '"';
 
 NOT : 'not';
 
@@ -45,8 +43,10 @@ PR : 'pr';
 LPAREN : '(';
 RPAREN : ')';
 
-ATTRNAME : ('-' | '_' | 'A'..'Z' | 'a'..'z' | '0'..'9' | '.')+;
+WS : ' ';
 
-WS : ('\t' | ' ' | '\r' | '\n'| '\u000C')+ -> skip;
+ATTRNAME : [-_.a-zA-Z0-9]+;
 
-ANY : ~('"' | '(' | ')');
+ANY : ~["()];
+
+EOL : [\t\r\n\u000C]+ -> skip;

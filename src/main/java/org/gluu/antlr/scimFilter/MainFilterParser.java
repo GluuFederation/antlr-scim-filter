@@ -7,9 +7,7 @@ package org.gluu.antlr.scimFilter;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.gluu.antlr.scimFilter.exception.ScimFilterErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
