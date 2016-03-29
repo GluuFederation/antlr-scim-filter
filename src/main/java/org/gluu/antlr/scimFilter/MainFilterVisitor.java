@@ -71,6 +71,34 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      * @param ctx
      */
     @Override
+    public String visitLBRAC_EXPR_RBRAC(ScimFilterParser.LBRAC_EXPR_RBRACContext ctx) {
+
+        // logger.info(">>>>> IN visitLBRAC_EXPR_RBRAC...");
+
+        StringBuilder result = new StringBuilder("");
+        result.append("(&");
+        result.append("(");
+        result.append(ctx.ATTRNAME());
+        result.append("=*");
+        result.append(")");
+        result.append("(");
+        result.append(visit(ctx.expression()));  // Add check if child attributes belong to the parent
+        result.append(")");
+        result.append(")");
+
+        return result.toString();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     *
+     * @param ctx
+     */
+    @Override
     public String visitNOT_EXPR(ScimFilterParser.NOT_EXPRContext ctx) {
 
         // logger.info(">>>>> IN visitNOT_EXPR...");
