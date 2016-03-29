@@ -29,6 +29,7 @@ public class FilterTest {
             // Valid
             { true, "userType eq \"emplo\"yee\"" },
             { true, "userType eq \"emp lo\"yee\"" },
+            { true, "urn:ietf:params:scim:schemas:core:2.0:User:userName sw \"J\"" },
             { true, "userType ne \"ñÑ~!@#$%^\"\"&:*'/<,.`>()-=_+\"" },
             { true, "userType  ne   \"ñÑ~!@\"#$%^\\&:*'\"\"/<,.`>()-=_+\"" },
             { true, "lastModified gt \"2011-05-13T04:42:34Z\"" },

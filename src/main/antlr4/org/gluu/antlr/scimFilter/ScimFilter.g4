@@ -45,7 +45,7 @@ RPAREN : ')';
 
 WS : ' ';
 
-ATTRNAME : [-_.a-zA-Z0-9]+;
+ATTRNAME : [-_.:a-zA-Z0-9]+;
 
 ANY : ~["()];
 
