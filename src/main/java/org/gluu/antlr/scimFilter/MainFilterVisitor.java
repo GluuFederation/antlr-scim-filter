@@ -89,7 +89,6 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
         return result.toString();
     }
 
-
     /**
      * {@inheritDoc}
      * <p>
@@ -251,7 +250,16 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      */
     @Override
     public String visitCriteria(ScimFilterParser.CriteriaContext ctx) {
+
         // logger.info(">>>>> IN visitCriteria...");
-        return ctx.getText().replaceAll("^\"|\"$", "");
+
+        String result = ctx.getText();
+        result = result.replaceAll("^\"|\"$", "");
+        result = result.replaceAll("\\\\", "\5c");
+        result = result.replaceAll("\\*", "\2a");
+        result = result.replaceAll("\\(", "\28");
+        result = result.replaceAll("\\)", "\29");
+
+        return result;
     }
 }
