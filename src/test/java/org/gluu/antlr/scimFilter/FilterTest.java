@@ -31,8 +31,9 @@ public class FilterTest {
             { true, "userType eq \"emp lo\"yee\"" },
             { true, "urn:ietf:params:scim:schemas:core:2.0:User:userName sw \"J\"" },
             { true, "emails[type eq \"work\" and value co \"@example.com\"]"},
-            { true, "userType ne \"ñÑ~!@#$%^\"\"&:*'/<,.`>()-=_+\"" },
-            { true, "userType  ne   \"ñÑ~!@\"#$%^\\&:*'\"\"/<,.`>()-=_+\"" },
+            { true, "userType eq \"Employee\" and emails[type eq \"work\" and value co \"@example.com\"]"},
+            { true, "userType ne \"ñÑ~!@#$%^\"\"&:*'/<,.`>()[]-=_+\"" },
+            { true, "userType  ne   \"[ñ[Ñ~!@\"#$%^\\&:*'\"\"/<,.`>()-]=_+[]]\"" },
             { true, "lastModified gt \"2011-05-13T04:42:34Z\"" },
             // { true, "userType eq \"employee\"" },
             // { true, "userType1234 ne \"Employee\" and email.type eq \"work\"" },
@@ -46,8 +47,8 @@ public class FilterTest {
             // { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and user_Type eq \"employee\")" },
             // { true, "userType eq \"employee\" and userType pr" },
             // { true, "userType pr and userType eq \"employee\"" },
-            { true, "userType pr and ( (type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
-            { true, "userType pr and (type eq \"work\" or type eq \"personal\"  ) and (userType eq \"employee\")" },
+            { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
+            { true, "userType pr and (type eq \"work\" or type eq \"personal\") and (userType eq \"employee\")" },
             { true, "userType pr and type eq \"work\" or type eq \"personal\" and userType eq \"employee\"" }
             // { true, "userType pr and (type eq \"work\" or type eq \"personal\") and userType eq \"employee\"" }
             // Invalid

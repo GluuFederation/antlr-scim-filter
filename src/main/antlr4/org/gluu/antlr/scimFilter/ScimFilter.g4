@@ -17,15 +17,15 @@ scimFilter
  ;
 
 expression
- : NOT WS+? expression                             # NOT_EXPR
- | expression WS+? AND WS+? expression             # EXPR_AND_EXPR
- | expression WS+? OR WS+ expression               # EXPR_OR_EXPR
- | expression WS+? operator WS+? expression        # EXPR_OPER_EXPR
- | ATTRNAME WS+? PR                                # ATTR_PR
- | ATTRNAME WS+? operator WS+? expression          # ATTR_OPER_EXPR
- | ATTRNAME WS+? operator WS+? criteria            # ATTR_OPER_CRITERIA
- | LPAREN WS*? expression WS*? RPAREN              # LPAREN_EXPR_RPAREN
- | ATTRNAME WS*? LBRAC WS*? expression WS*? RBRAC  # LBRAC_EXPR_RBRAC
+ : NOT WS+? expression                        # NOT_EXPR
+ | expression WS+? AND WS+? expression        # EXPR_AND_EXPR
+ | expression WS+? OR WS+ expression          # EXPR_OR_EXPR
+ | expression WS+? operator WS+? expression   # EXPR_OPER_EXPR
+ | ATTRNAME WS+? PR                           # ATTR_PR
+ | ATTRNAME WS+? operator WS+? expression     # ATTR_OPER_EXPR
+ | ATTRNAME WS+? operator WS+? criteria       # ATTR_OPER_CRITERIA
+ | LPAREN WS*? expression WS*? RPAREN         # LPAREN_EXPR_RPAREN
+ | ATTRNAME LBRAC WS*? expression WS*? RBRAC  # LBRAC_EXPR_RBRAC
  ;
 
 criteria : '"' .+? '"';
