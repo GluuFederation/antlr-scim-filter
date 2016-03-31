@@ -27,29 +27,30 @@ public class FilterTest {
 
         return Arrays.asList(new Object[][] {
             // Valid
-            { true, "userType eq \"emplo\"yee\"" },
+            { true, "userType Eq \"emplo\"yee\"" },
             { true, "userType eq \"emp lo\"yee\"" },
             { true, "urn:ietf:params:scim:schemas:core:2.0:User:userName sw \"J\"" },
-            { true, "emails[type eq \"work\" and value co \"@example.com\"]"},
-            { true, "userType eq \"Employee\" and emails[type eq \"work\" and value co \"@example.com\"]"},
+            { true, "emails[type EQ \"work\" and value co \"@example.com\"]"},
+            { true, "userType eq \"Employee\" and emails[type eq \"work\" and value CO \"@example.com\"]"},
             { true, "userType ne \"ñÑ~!@#$%^\"\"&:*'/<,.`>()[]-=_+\"" },
             { true, "userType  ne   \"[ñ[Ñ~!@\"#$%^\\&:*'\"\"/<,.`>()-]=_+[]]\"" },
-            { true, "lastModified gt \"2011-05-13T04:42:34Z\"" },
+            { true, "lastModified gT \"2011-05-13T04:42:34Z\"" },
             // { true, "userType eq \"employee\"" },
             // { true, "userType1234 ne \"Employee\" and email.type eq \"work\"" },
             // { true, "userType1234 ne \"Employee\" or email.type eq \"work\"" },
-            { true, "userType1234 ne \"Emp.loyee\" or email.type eq \"work\"" },
+            { true, "userType1234 Ne \"Emp.loyee\" or email.type eq \"work\"" },
             // { true, "userType pr" },
             // { true, "userType pr and not (userType eq \"employee\")" },
-            { true, "not userType eq \"emp loyee\"" },
+            { true, "not userType eQ \"emp loyee\"" },
             // { true, "not (userType eq \"employee\")" },
             // { true, "userType eq \"employee\" and (email.type eq \"Work\" or email-type eq \"personal\")" },
             // { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and user_Type eq \"employee\")" },
             // { true, "userType eq \"employee\" and userType pr" },
             // { true, "userType pr and userType eq \"employee\"" },
-            { true, "userType pr and ((type eq \"work\" or type eq \"personal\") and userType eq \"employee\")" },
-            { true, "userType pr and (type eq \"work\" or type eq \"personal\") and (userType eq \"employee\")" },
-            { true, "userType pr and type eq \"work\" or type eq \"personal\" and userType eq \"employee\"" }
+            { true, "cars gT \"3\"" },
+            { true, "userType pR aNd ( (type eq \"work\" or type eq \"personal\") and cars gT \"3\")" },
+            { true, "userType Pr AND (cars GE \"3\" or type eq \"personal\"  ) anD (userType eq \"employee\")" },
+            { true, "userType PR And cars Le \"3\" or type eq \"personal\" and userType eq \"employee\"" }
             // { true, "userType pr and (type eq \"work\" or type eq \"personal\") and userType eq \"employee\"" }
             // Invalid
             /*

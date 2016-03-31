@@ -13,8 +13,8 @@ import java.util.Map;
  */
 public enum ScimOperator {
 
-    // eq | ne  | co   | sw  | ew  | gt        | lt        | ge | le
-    // =  | !() | *{}* | {}* | *{} | (>=)(!{}) | (<=)(!{}) | >= | <=
+    // eq | ne  | co   | sw  | ew  | gt           | lt           | ge | le
+    // =  | !() | *{}* | {}* | *{} | (&(>=)(!{})) | (&(<=)(!{})) | >= | <=
 
     EQUAL ("eq"),
     NOT_EQUAL ("ne"),
@@ -44,7 +44,7 @@ public enum ScimOperator {
 
         StringBuilder result = new StringBuilder("");
 
-        switch (getByValue(operator)) {
+        switch (getByValue(operator.toLowerCase())) {
 
             case EQUAL:
                 result.append(leftExpr);
@@ -81,29 +81,29 @@ public enum ScimOperator {
                 break;
 
             case GREATER_THAN:
-                result.append("(");
+                result.append("&(");
                 result.append(leftExpr);
                 result.append(">=");
                 result.append(rightExpr);
                 result.append(")");
-                result.append("(!");
+                result.append("(!(");
                 result.append(leftExpr);
                 result.append("=");
                 result.append(rightExpr);
-                result.append(")");
+                result.append("))");
                 break;
 
             case LESS_THAN:
-                result.append("(");
+                result.append("&(");
                 result.append(leftExpr);
                 result.append("<=");
                 result.append(rightExpr);
                 result.append(")");
-                result.append("(!");
+                result.append("(!(");
                 result.append(leftExpr);
                 result.append("=");
                 result.append(rightExpr);
-                result.append(")");
+                result.append("))");
                 break;
 
             case GREATER_THAN_OR_EQUAL:

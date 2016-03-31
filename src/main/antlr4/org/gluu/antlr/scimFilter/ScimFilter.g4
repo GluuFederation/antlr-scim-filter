@@ -31,15 +31,25 @@ expression
 criteria : '"' .+? '"';
 
 operator
- : 'eq' | 'ne' | 'co' | 'sw' | 'ew' | 'gt' | 'lt' | 'ge' | 'le'
+ : EQ | NE | CO | SW | EW | GT | LT | GE | LE
  ;
 
-NOT : 'not';
+EQ : [eE][qQ];
+NE : [nN][eE];
+CO : [cC][oO];
+SW : [sS][wW];
+EW : [eE][wW];
+GT : [gG][tT];
+LT : [lL][tT];
+GE : [gG][eE];
+LE : [lL][eE];
 
-AND : 'and';
-OR  : 'or';
+NOT : [nN][oO][tT];
 
-PR : 'pr';
+AND : [aA][nN][dD];
+OR  : [oO][rR];
+
+PR : [pP][rR];
 
 LPAREN : '(';
 RPAREN : ')';

@@ -51,15 +51,8 @@ public class MainFilterVisitor extends ScimFilterBaseVisitor<String> {
      */
     @Override
     public String visitLPAREN_EXPR_RPAREN(ScimFilterParser.LPAREN_EXPR_RPARENContext ctx) {
-
         // logger.info(">>>>> IN visitLPAREN_EXPR_RPAREN...");
-
-        StringBuilder result = new StringBuilder("");
-        result.append(ctx.LPAREN().getText());
-        result.append(visit(ctx.expression()));
-        result.append(ctx.RPAREN().getText());
-
-        return result.toString();
+        return visit(ctx.expression());
     }
 
     /**
